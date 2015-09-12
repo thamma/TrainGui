@@ -14,6 +14,12 @@ public class Coordinate {
 		this.y = y;
 	}
 
+	public double getDistance(Coordinate remote) {
+		double dx = this.x - remote.x;
+		double dy = this.y - remote.y;
+		return Math.sqrt(dx * dx + dy * dy);
+	}
+
 	public double getX() {
 		return this.x;
 	}

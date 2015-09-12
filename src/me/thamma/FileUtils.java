@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileUtils {
-	public final static String root = System.getenv("APPDATA") + "/train/";
+	// public final static String root = System.getenv("APPDATA") + "/train/";
+	public final static String root = "";
 
 	public static List<String> loadFile(String subpath) {
 		List<String> lines = new ArrayList<String>();
