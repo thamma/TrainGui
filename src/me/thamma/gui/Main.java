@@ -1,4 +1,4 @@
-package me.thamma;
+package me.thamma.gui;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import me.thamma.game.Graph;
 
 public class Main extends Application {
 
@@ -61,12 +62,12 @@ public class Main extends Application {
 		grid.gridLinesVisibleProperty().set(true);
 		Scene scene = new Scene(grid, 200, 200);
 
-		Graph g = Graph.loadGraph("src/me/thamma/minimap.map");
+		Graph g = Graph.loadGraph("src/me/thamma/resources/minimap.map");
 
 		g.draw(canvasPane);
 
 		grid.getChildren().addAll(flow, canvasPane);
-		scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+		scene.getStylesheets().addAll(this.getClass().getResource("../resources/style.css").toExternalForm());
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

@@ -1,6 +1,6 @@
-package me.thamma;
+package me.thamma.game;
 
-public class Quest {
+public class Mission {
 
 	private int points;
 	private int from;

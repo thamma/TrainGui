@@ -1,4 +1,4 @@
-package me.thamma;
+package me.thamma.game;
 
 import javafx.scene.paint.Color;
 

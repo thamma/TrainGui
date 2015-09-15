@@ -1,4 +1,4 @@
-package me.thamma;
+package utils;
 
 import java.util.List;
 import java.util.Map;

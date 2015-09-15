@@ -1,10 +1,10 @@
-package me.thamma;
+package me.thamma.game;
 
-import static me.thamma.GuiEvents.edgeHoverOff;
-import static me.thamma.GuiEvents.edgeHoverOn;
-import static me.thamma.GuiEvents.nodeClick;
-import static me.thamma.GuiEvents.nodeHoverOff;
-import static me.thamma.GuiEvents.nodeHoverOn;
+import static me.thamma.gui.GuiEvents.edgeHoverOff;
+import static me.thamma.gui.GuiEvents.edgeHoverOn;
+import static me.thamma.gui.GuiEvents.nodeClick;
+import static me.thamma.gui.GuiEvents.nodeHoverOff;
+import static me.thamma.gui.GuiEvents.nodeHoverOn;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,6 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
+import utils.FileUtils;
 
 public class Graph implements Iterable<Node> {
 

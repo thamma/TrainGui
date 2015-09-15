@@ -1,4 +1,4 @@
-package me.thamma;
+package me.thamma.game;
 
 public class Coordinate {
 	private double x;

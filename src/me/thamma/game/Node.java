@@ -1,4 +1,4 @@
-package me.thamma;
+package me.thamma.game;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,8 +1,10 @@
-package me.thamma;
+package me.thamma.gui;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import me.thamma.game.Edge;
+import me.thamma.game.Node;
 
 public class GuiEvents {
 
