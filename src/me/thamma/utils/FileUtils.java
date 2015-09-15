@@ -1,4 +1,4 @@
-package me.thamma;
+package me.thamma.utils;
 
 import java.io.BufferedReader;
 import java.io.File;

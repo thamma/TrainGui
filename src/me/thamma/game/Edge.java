@@ -1,18 +1,22 @@
-package me.thamma;
+package me.thamma.game;
 
 import javafx.scene.paint.Color;
 
 public class Edge {
 
-	private int id, from, to, length;
+	private int id, length;
 	private Color color;
+	boolean tunnel;
 
-	public Edge(int id, int from, int to, int lenght, Color color) {
+	public Edge(int id, int lenght, Color color, boolean tunnel) {
 		this.id = id;
-		this.from = from;
-		this.to = to;
 		this.length = lenght;
 		this.color = color;
+		this.tunnel = tunnel;
+	}
+
+	public boolean isTunnel() {
+		return this.tunnel;
 	}
 
 	public Color getColor() {
@@ -21,14 +25,6 @@ public class Edge {
 
 	public int getId() {
 		return id;
-	}
-
-	public int getFrom() {
-		return from;
-	}
-
-	public int getTo() {
-		return to;
 	}
 
 	public int getLength() {
