@@ -7,6 +7,7 @@ import java.util.List;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
@@ -37,6 +38,7 @@ public class Graph implements Iterable<Node> {
 	public List<Node> getNodes() {
 		return this.parser.getNodes();
 	}
+
 	private Coordinate minCoord, maxCoord;
 
 	/**
@@ -76,9 +78,9 @@ public class Graph implements Iterable<Node> {
 		this.maxCoord = new Coordinate(maxX, maxY);
 	}
 
-	public final int radius = 25;
-	public final int padding = 40;
-	public final Font font = new Font("Arial", radius);
+	public final int radius = 20;
+	public final int padding = 80;
+	public final Font font = new Font("Arial", 20);
 	public final double gap = radius + 15;
 
 	/**
@@ -134,16 +136,25 @@ public class Graph implements Iterable<Node> {
 				x2 = node1.getCanvasCoordinate(this, overlay, padding).getY(),
 				y1 = node2.getCanvasCoordinate(this, overlay, padding).getX(),
 				y2 = node2.getCanvasCoordinate(this, overlay, padding).getY();
+		// main connection line
 		Line edgeLine = new Line(x1, x2, y1, y2);
 		edgeLine.setStrokeWidth(radius / 2);
 		edgeLine.setStroke(edge.getColor());
-		//
+		// tunnel highlighting
+		if (edge.isTunnel()) {
+			Line tunnelLine = new Line(x1, x2, y1, y2);
+			tunnelLine.setStrokeWidth(radius *3/2);
+			tunnelLine.setStroke(Color.BLACK);
+			tunnelLine.toBack();
+			overlay.getChildren().addAll(tunnelLine);
+		}
+		// secondary edge, used for highlighting of edge
 		Line bgLine = new Line(x1, x2, y1, y2);
-		bgLine.toBack();
 		bgLine.setVisible(false);
 		bgLine.setStroke(edge.getColor().invert());
+		// bigger radius to be shown behind the actual edge
 		bgLine.setStrokeWidth(radius / 2 + 2);
-		edgeLine.setOnMouseClicked(event -> java.awt.Toolkit.getDefaultToolkit().beep());
+		edgeLine.setOnMouseClicked(event -> edgeClick(edgeLine, edge, bgLine));
 		edgeLine.setOnMouseEntered(event -> edgeHoverOn(edgeLine, edge, bgLine));
 		edgeLine.setOnMouseExited(event -> edgeHoverOff(edgeLine, edge, bgLine));
 		double dash = calculateDashLength(edge, overlay, node1, node2);
@@ -180,13 +191,11 @@ public class Graph implements Iterable<Node> {
 	private void drawEdges(Pane overlay) {
 		// remember the already drawn edges whilst visiting each node
 		List<Edge> drawn = new ArrayList<Edge>();
-		for (Node n : this) {
-			for (Edge edge : n.getOutgoing().keySet()) {
+		for (Node n : this)
+			for (Edge edge : n.getOutgoing().keySet())
 				if (!drawn.contains(edge)) {
 					drawSingleEdge(overlay, n, edge, n.getOutgoing().get(edge));
 					drawn.add(edge);
 				}
-			}
-		}
 	}
 }

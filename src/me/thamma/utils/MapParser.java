@@ -75,7 +75,7 @@ public class MapParser {
 						int cityid2 = Integer.parseInt(args[1]);
 						int length = Integer.parseInt(args[2]);
 						TrackKind kind = TrackKind.valueOf(args[3]);
-						boolean tunnel = Boolean.valueOf(args[4]);
+						boolean tunnel = args[4].equals("T");
 						Edge edge = new Edge(i - offset, length, kind.getColor(), tunnel);
 						// invariant: nodes are already built!
 						// linked registering of the edges in nodes

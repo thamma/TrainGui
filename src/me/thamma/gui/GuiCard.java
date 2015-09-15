@@ -1,6 +1,5 @@
 package me.thamma.gui;
 
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -10,25 +9,17 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
 import me.thamma.game.TrackKind;
 
-public class GuiCard {
+public class GuiCard extends Pane {
 
 	private TrackKind kind;
 	private int amount;
 	private Rectangle rect;
 
-	public GuiCard(TrackKind kind, int amount) {
+	public GuiCard(double w, double h, TrackKind kind, int amount) {
+		super();
 		this.kind = kind;
 		this.amount = amount;
-	}
-
-	public Pane drawPane() {
-		return drawPane(70, 100);
-	}
-
-	public Pane drawPane(int w, int h) {
-		Canvas canvas = new Canvas(w, h);
-		Pane p = new Pane();
-		p.getChildren().add(canvas);
+		this.resize(w, h);
 		rect = null;
 		if (this.kind != TrackKind.ALL) {
 			rect = new Rectangle(w, h, this.kind.getColor());
@@ -44,8 +35,7 @@ public class GuiCard {
 		Label l = new Label("" + this.amount);
 		l.setTextFill(kind.getColor().invert());
 		l.relocate(w - 20, h - 20);
-		p.getChildren().addAll(rect, l);
-		return p;
+		this.getChildren().addAll(rect, l);
 	}
 
 	public void highLight(boolean highlight) {
@@ -54,10 +44,6 @@ public class GuiCard {
 		} else {
 			rect.setStroke(Color.BLACK);
 		}
-	}
-
-	public GuiCard(TrackKind kind) {
-		this(kind, 0);
 	}
 
 	public void setAmount(int i) {
