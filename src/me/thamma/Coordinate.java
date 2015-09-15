@@ -10,8 +10,19 @@ public class Coordinate {
 	}
 
 	public Coordinate(int x, int y) {
-		this.x = x;
-		this.y = y;
+		this(Double.valueOf(x),Double.valueOf(y));
+	}
+
+	/**
+	 * 
+	 * @param remote
+	 *            The coordinate calculating the distance to
+	 * @return The Cartesian distance
+	 */
+	public double getDistance(Coordinate remote) {
+		double dx = this.x - remote.x;
+		double dy = this.y - remote.y;
+		return Math.sqrt(dx * dx + dy * dy);
 	}
 
 	public double getX() {
