@@ -15,7 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
-import utils.FileUtils;
+import me.thamma.utils.FileUtils;
 
 public class Graph implements Iterable<Node> {
 
