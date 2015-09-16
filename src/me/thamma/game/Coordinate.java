@@ -10,7 +10,7 @@ public class Coordinate {
 	}
 
 	public Coordinate(int x, int y) {
-		this(Double.valueOf(x),Double.valueOf(y));
+		this(Double.valueOf(x), Double.valueOf(y));
 	}
 
 	/**
@@ -20,9 +20,7 @@ public class Coordinate {
 	 * @return The Cartesian distance
 	 */
 	public double getDistance(Coordinate remote) {
-		double dx = this.x - remote.x;
-		double dy = this.y - remote.y;
-		return Math.sqrt(dx * dx + dy * dy);
+		return this.sub(remote).getLength();
 	}
 
 	public double getX() {
@@ -31,6 +29,35 @@ public class Coordinate {
 
 	public double getY() {
 		return this.y;
+	}
+
+	public Coordinate add(Coordinate remote) {
+		return new Coordinate(this.x + remote.getX(), this.y + remote.getY());
+	}
+
+	public Coordinate sub(Coordinate remote) {
+		return this.add(remote.multiply(-1.0));
+	}
+
+	public Coordinate multiply(Double d) {
+		return new Coordinate(this.x * d, this.y * d);
+	}
+
+	public Coordinate normalize() {
+		return this.clone().multiply(1 / this.getLength());
+	}
+
+	public Coordinate normalize(double d) {
+		return this.normalize().multiply(d);
+	}
+
+	public double getLength() {
+		return Math.sqrt(this.x * this.x + this.y * this.y);
+	}
+
+	@Override
+	public Coordinate clone() {
+		return new Coordinate(this.x, this.y);
 	}
 
 	@Override

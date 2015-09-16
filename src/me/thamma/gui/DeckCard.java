@@ -9,13 +9,13 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
 import me.thamma.game.TrackKind;
 
-public class GuiCard extends Pane {
+public class DeckCard extends Pane {
 
 	private TrackKind kind;
 	private int amount;
 	private Rectangle rect;
 
-	public GuiCard(double w, double h, TrackKind kind, int amount) {
+	public DeckCard(double w, double h, TrackKind kind, int amount) {
 		super();
 		this.kind = kind;
 		this.amount = amount;

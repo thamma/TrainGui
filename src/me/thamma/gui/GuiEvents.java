@@ -21,13 +21,13 @@ public class GuiEvents {
 	}
 
 	public static void edgeHoverOn(Line l, Edge e, Line temp) {
-		temp.setVisible(true);
-		temp.toBack();
+//		temp.setVisible(true);
+//		temp.toBack();
 	}
 
 	public static void edgeHoverOff(Line l, Edge e, Line temp) {
-		temp.setVisible(false);
-		l.setVisible(true);
+//		temp.setVisible(false);
+//		l.setVisible(true);
 	}
 
 	public static void edgeClick(Line l, Edge e, Line temp) {

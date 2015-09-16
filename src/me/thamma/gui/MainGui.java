@@ -21,8 +21,10 @@ public class MainGui extends Application {
 
 	public static Map<TrackKind, Integer> hand;
 	public FlowPane handPane;
+	public FlowPane playerPane;
 
 	public static void main(String[] args) {
+		// TODO build constructor using a given graph
 		// Setup hand cards
 		Map<TrackKind, Integer> a = new HashMap<TrackKind, Integer>();
 		for (TrackKind k : TrackKind.values()) {
@@ -51,28 +53,35 @@ public class MainGui extends Application {
 
 		grid.setId("background");
 		grid.setPadding(new Insets(10, 10, 10, 10));
-		grid.setVgap(8);
+		grid.setVgap(10);
 		grid.setHgap(10);
 
 		handPane = new FlowPane();
 		handPane.setOrientation(Orientation.HORIZONTAL);
 		handPane.setAlignment(Pos.CENTER);
 
-		Pane canvasPane = new Pane();
-		canvasPane.resize(screenWidth - 300, screenHeight - 150);
+		playerPane = new FlowPane();
+		playerPane.setOrientation(Orientation.VERTICAL);
+		playerPane.setAlignment(Pos.TOP_CENTER);
 
-		GridPane.setConstraints(canvasPane, 0, 0);
+		playerPane.getChildren().add(new PlayerCard("Sus", 0, 8, 3));
+
+		Pane graphPane = new Pane();
+		graphPane.resize(screenWidth - 250, screenHeight - 120);
+
+		GridPane.setConstraints(graphPane, 0, 0);
 		GridPane.setConstraints(handPane, 0, 1);
+		GridPane.setConstraints(playerPane, 1, 0);
 		// TODO: Remove Grid lines (for debug purposes)
-		grid.gridLinesVisibleProperty().set(true);
+//		grid.gridLinesVisibleProperty().set(true);
 		Scene scene = new Scene(grid);
 
 		updateHand();
 		Graph g = new Graph("src/me/thamma/resources/minimap.map");
 
-		g.draw(canvasPane);
+		g.draw(graphPane);
 
-		grid.getChildren().addAll(handPane, canvasPane);
+		grid.getChildren().addAll(handPane, playerPane, graphPane);
 		scene.getStylesheets().addAll(this.getClass().getResource("../resources/style.css").toExternalForm());
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -83,7 +92,7 @@ public class MainGui extends Application {
 		for (TrackKind k : hand.keySet()) {
 			// GuiCard card = new GuiCard(k, hand.get(k));
 			// Pane pane = card.drawPane();
-			GuiCard card = new GuiCard(80, 100, k, 4);
+			DeckCard card = new DeckCard(100, 130, k, 4);
 			card.highLight(false);
 			card.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> {
 				card.highLight(true);
@@ -95,5 +104,9 @@ public class MainGui extends Application {
 			handPane.getChildren().add(card);
 			FlowPane.setMargin(card, new Insets(6, 6, 6, 6));
 		}
+	}
+
+	public void updatePlayers() {
+		
 	}
 }
