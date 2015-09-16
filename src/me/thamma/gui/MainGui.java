@@ -64,7 +64,8 @@ public class MainGui extends Application {
 		playerPane.setOrientation(Orientation.VERTICAL);
 		playerPane.setAlignment(Pos.TOP_CENTER);
 
-		playerPane.getChildren().add(new PlayerCard("Sus", 0, 8, 3));
+		playerPane.getChildren().add(new PlayerCard("Anna", 0, 8, 3));
+		playerPane.getChildren().add(new PlayerCard("Jan", 1, 4, 7));
 
 		Pane graphPane = new Pane();
 		graphPane.resize(screenWidth - 250, screenHeight - 120);
