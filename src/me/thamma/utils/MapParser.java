@@ -16,7 +16,7 @@ public class MapParser {
 	private List<Edge> edges;
 	private Map<TrackKind, Integer> cards;
 	private List<Mission> missions;
-	int maxTracks;
+	private int maxTracks;
 
 	public MapParser(String filename) {
 		this(FileUtils.loadFile(filename));
@@ -28,7 +28,13 @@ public class MapParser {
 		this.nodes = new ArrayList<Node>();
 		this.missions = new ArrayList<Mission>();
 		int mode = 0;
+		// offset which line to be read
 		int offset = 0;
+		// modes:
+		// 0: Limits
+		// 1: Staedte
+		// 2: Strecken
+		// 3: Auftraege
 		try {
 			for (int i = 0; i < l.size(); i++) {
 				String s = l.get(i);
@@ -36,23 +42,35 @@ public class MapParser {
 					mode = 0;
 					offset = i + 1;
 				} else if (s.equalsIgnoreCase("Staedte:")) {
+					if (mode != 0) {
+						System.out.println("Mapfile not valid");
+						System.exit(1);
+					}
 					mode = 1;
 					offset = i + 1;
 				} else if (s.equalsIgnoreCase("Strecken:")) {
+					if (mode != 1) {
+						System.out.println("Mapfile not valid");
+						System.exit(1);
+					}
 					mode = 2;
 					offset = i + 1;
 				} else if (s.equalsIgnoreCase("Auftraege:")) {
+					if (mode != 2) {
+						System.out.println("Mapfile not valid");
+						System.exit(1);
+					}
 					mode = 3;
 					offset = i + 1;
 				} else {
 					String[] args = s.split(",");
 					switch (mode) {
 					case 0: {
-						// initialize stack of cards
-						// initialize maxTracks
 						if (args[0].equalsIgnoreCase("MaxTracks")) {
+							// initialize maxTracks
 							this.maxTracks = Integer.parseInt(args[1]);
 						} else {
+							// initialize stack of cards
 							TrackKind kind = TrackKind.valueOf(args[0]);
 							int amount = Integer.parseInt(args[1]);
 							this.cards.put(kind, amount);
@@ -65,7 +83,7 @@ public class MapParser {
 						int x = Integer.parseInt(args[1]);
 						int y = Integer.parseInt(args[2]);
 						Node node = new Node(name, i - offset, x, y);
-						//add node to graph
+						// add node to graph
 						this.nodes.add(node);
 					}
 						break;
@@ -109,15 +127,19 @@ public class MapParser {
 	}
 
 	public List<Edge> getEdges() {
-		return edges;
+		return this.edges;
 	}
 
 	public Map<TrackKind, Integer> getCards() {
-		return cards;
+		return this.cards;
 	}
 
 	public List<Mission> getQuests() {
-		return missions;
+		return this.missions;
+	}
+
+	public int getMaxTracks() {
+		return this.maxTracks;
 	}
 
 }

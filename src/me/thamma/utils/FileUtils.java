@@ -25,7 +25,7 @@ public class FileUtils {
 				br.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				System.out.println("Error loading file: \"" + e.getMessage() + "\"");
+				System.out.println("Error reading file: \"" + e.getMessage() + "\"");
 			}
 
 		} else {
